@@ -1,0 +1,26 @@
+# Number of replicas for the deployment
+replicaCount: 1
+
+# Image configuration
+image:
+  repository: chillerdragon/ddnet-simple      # Base image repository
+  tag: "latest"                               # Image tag
+  pullPolicy: IfNotPresent                    # Image pull policy
+
+# Ports configuration
+server_port: 8303                             # Port for the server (UDP)
+econ_port: 8000                               # Port for the econ service (TCP)
+
+# Volume mount configurations
+volumeMounts:
+  - mountPath: /root/.local/share/ddnet/bans
+    subPath: bans
+
+# Configuration path for the container
+ConfigPath: config/mode/fng                    # Path to the configuration file
+
+# Persistent volume claim name
+persistentVolumeClaimName: tw                  # Name of the PVC to use
+
+# Image pull secrets (optional)
+imagePullSecrets: []                           # List of image pull secrets (leave empty if not needed)

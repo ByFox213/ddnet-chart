@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: {{ .Release.Name }}
+    mode: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      name: {{ .Release.Name }}
+      mode: {{ .Release.Name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: {{ .Release.Name }}
+        mode: {{ .Release.Name }}
+    spec:
+      containers:
+      - args:
+        - -f
+        - {{ .Values.ConfigPath }}              # Directly reference ConfigPath
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        name: server
+        ports:
+        - containerPort: {{ .Values.econ_port }}
+          name: econ
+          protocol: TCP
+        - containerPort: {{ .Values.server_port }}
+          hostPort: {{ .Values.server_port }}
+          name: server
+          protocol: UDP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: {{ .Values.econ_port }}
+          timeoutSeconds: 1
+        volumeMounts:
+        {{- range .Values.volumeMounts }}
+        - mountPath: {{ .mountPath }}
+          subPath: {{ .subPath }}
+          name: {{ $.Values.persistentVolumeClaimName }}
+        {{- end }}
+        {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+      {{- range .Values.imagePullSecrets }}
+        - name: {{ . }}
+      {{- end }}
+      {{- end }}
+      volumes:
+      - name: {{ .Values.persistentVolumeClaimName }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistentVolumeClaimName }}

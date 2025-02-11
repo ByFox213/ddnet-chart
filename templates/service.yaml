@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  namespace: tw
+spec:
+  internalTrafficPolicy: Local
+  ports:
+  - port: {{ .Values.econ_port }}
+    protocol: TCP
+    targetPort: econ
+  selector:
+    name: {{ .Release.Name }}
+  type: ClusterIP
