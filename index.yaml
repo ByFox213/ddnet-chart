@@ -9,6 +9,6 @@ entries:
     sources:
     - https://github.com/ByFox213/ddnet-chart
     urls:
-    - https://ByFox213.github.io/ddnet-chart/ddnet-0.1.0.tgz
+    - https://raw.githubusercontent.com/ByFox213/ddnet-chart/main/ddnet-0.1.0.tgz
     version: 0.1.0
 generated: "2025-02-11T11:58:03.050289048+05:00"
