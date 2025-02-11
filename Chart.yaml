@@ -2,3 +2,5 @@ apiVersion: v2
 name: ddnet
 description: A Helm chart for deploying ddnet
 version: 0.1.0
+sources:
+  - https://github.com/ByFox213/ddnet-chart

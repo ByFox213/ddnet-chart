@@ -2,11 +2,13 @@ apiVersion: v1
 entries:
   ddnet:
   - apiVersion: v2
-    created: "2025-02-11T11:36:39.011308552+05:00"
+    created: "2025-02-11T11:55:04.645140508+05:00"
     description: A Helm chart for deploying ddnet
-    digest: 7b814c62b1eea69476a0fe6cb82918db0262a4d1dbd5e7f443c79fd298c66403
+    digest: 0f17e1e92fe8dda48509017894da0699be383cc6f8af5b2117da95c6a67620f1
     name: ddnet
+    sources:
+    - https://github.com/ByFox213/ddnet-chart
     urls:
-    - https://ByFox213.github.io/ddnet-chart/ddnet-0.1.0.tgz
+    - ddnet-0.1.0.tgz
     version: 0.1.0
-generated: "2025-02-11T11:36:39.010855761+05:00"
+generated: "2025-02-11T11:55:04.643735546+05:00"
